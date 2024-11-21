@@ -11,8 +11,8 @@ function timer(){
 }
 
 
-function showRandomWord(difficulty,timer){
-    while (timer){
+function generateRandomWord(difficulty,timer){
+    while (timer>0){
         if (difficulty === "easy"){
             generate({minLength:3,maxLength:5})
         }else if (difficulty ==="medium"){
@@ -21,5 +21,9 @@ function showRandomWord(difficulty,timer){
             generate({minLength:8})
         }
     }
+}
+
+function afficheRandomWord(){
+
 }
 
