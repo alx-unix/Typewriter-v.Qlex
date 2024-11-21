@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typewriter</title>
+    <link rel="stylesheet" href="style/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+    <script type="module" src="scripts/data.js" defer></script>
+    <script type="text/javascript" src="./scripts/game-scripts.js" defer></script>
+    <script type="text/javascript" src="scripts/main.js" defer></script>
+</head>
+<body>
+    <div class="root-container">
+        <header id="header">
+            <h1>Test your keyboard skills !</h1>
+            <nav>
+                <ul id="nav-ul">
+                    <li><a href="">Home</a></li>
+                    <li><a href="">Highscores</a></li>
+                    <li><a href="">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <div id="container">
+                <div id="choose-mode">
+                    <fieldset>
+                        <legend>Choose game difficulty:</legend>
+                    
+                        <div id="set-diff">
+                            <input type="radio" id="easy" name="difficulty" value="easy" checked />
+                            <label for="easy">Easy</label>
+                        </div>
+                    
+                        <div id="set-diff">
+                            <input type="radio" id="medium" name="difficulty" value="medium" />
+                            <label for="medium">Medium</label>
+                        </div>
+                    
+                        <div id="set-diff">
+                            <input type="radio" id="hard" name="difficulty" value="hard" />
+                            <label for="hard">Hard</label>
+                        </div>
+                        <div>
+                            <button type="submit" id="sbtButton">Submit</button>
+                        </div>
+                    </fieldset>
+                </div>
+                <div id="timer-section">
+                    <button type="text" id="strButton">Start Timer</button>
+                    <div id="timer"></div>
+                </div>
+                <div id="main-game"></div>
+                <div id="score-section"></div>
+            </div>
+        </main>
+        <footer>
+            <div id="footer">@Copyright Qlex</div>
+        </footer>
+    </div>
+</body>
+</html>

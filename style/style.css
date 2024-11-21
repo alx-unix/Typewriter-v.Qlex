@@ -1,0 +1,113 @@
+body, ul, li, header,main, footer{
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: antiquewhite;
+}
+a, a:visited, a:hover, a:active {
+    color: inherit;
+    text-decoration: none;
+}
+
+h1{
+    padding-right: 6rem;
+    font-size: 4rem;
+    font-family: cursive;
+}
+
+#header {
+    display:flex; 
+    justify-content: flex-end;
+    align-items: center;
+    border-bottom: 1px solid black;
+}
+
+nav ul{
+    display: flex;
+}
+
+li {
+    margin-right:1rem;
+    font-size: 1.75rem;
+    padding: 1rem;  
+}
+
+li:hover{
+    background-color: rgba(194, 195, 190, 0.5)
+}
+
+.root-container {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+p,
+label {
+    font:
+    1rem 'Fira Sans',
+    sans-serif;
+}
+
+#sbtButton{
+    padding:.35rem 0.5rem;
+    margin-left: 2.5rem;
+    color:white;
+    background-color: rgb(200, 203, 31);
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
+}
+#sbtButton:hover{
+    background-color: rgba(200,203,31,0.7);
+}
+
+
+fieldset{
+    margin-top: 2rem;
+    padding: 2rem 8rem;
+    display: flex;
+    align-items: center;
+}
+
+
+#set-diff{
+    margin-left:1.5rem;
+}
+
+#strButton{
+    padding:.35rem 0.5rem;
+    margin-left: 2.5rem;
+    color:white;
+    background-color: rgb(200, 203, 31);
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
+}
+
+#strButton:hover{
+    background-color: rgba(200,203,31,0.7);
+}
+
+#timer-section{
+    margin-top: 1rem;
+    font-family: 'Orbitron', sans-serif;
+}
+
+#timer{
+    padding: 1rem;
+    font-size: 3rem;
+}
+#timer-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
