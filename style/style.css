@@ -50,7 +50,8 @@ li:hover{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: start;
+    gap:2rem;
 }
 p,
 label {
@@ -116,7 +117,7 @@ fieldset{
     border: 1px solid #333;
     margin-left: 2rem;
     border-radius: 10px;
-    height:3.5rem;
+    height:3rem;
     width:auto;
 }
 
@@ -141,4 +142,17 @@ footer{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+#word-tapped{
+    display: inline-block;
+    width: 25rem;
+    height: 2.5rem;
+    border-radius: 1rem;
+    border: 1px solid #333;
+    font-size: 1.8rem;
+}
+
+#wordChosen{
+    font-size: 3rem;
 }
