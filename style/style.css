@@ -60,7 +60,7 @@ label {
     sans-serif;
 }
 
-#sbtButton{
+.button{
     padding:.75rem 1rem;
     margin-left: 2.5rem;
     color:rgb(0, 0, 0);
@@ -69,7 +69,7 @@ label {
     border: none;
     font-size: 1rem;
 }
-#sbtButton:hover{
+.button:hover{
     background-color: rgba(200,203,31,0.7);
 }
 

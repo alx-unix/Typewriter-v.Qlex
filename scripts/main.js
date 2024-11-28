@@ -1953,30 +1953,70 @@ const wordList = [
     "zulu",
 ];
 
-
-
 let startButton = document.getElementById("strButton");
 let submitDiffButton = document.getElementById("sbtButton");
 let diffChosen = document.getElementById("set-diff")
 let fieldsetDiff = document.getElementById("choose-diff-fieldset")
 let radioButtons = document.querySelectorAll('input[name="difficulty"]');
 let divWordShown = document.getElementById("wordChosen");
-let userInput = document.getElementById("user-input");
+let userInputElement = document.getElementById("user-input");
 let submitWordButton = document.getElementById("submit-word");
+let scoreSection = document.getElementById("score-section")
 
+let gameActive = false;
+let timerInterval = null;
 
-
-function timer(){
-    let sec = 20;
-    let countDown = setInterval(function(){
-        document.getElementById('timer').innerText='00:'+sec;
-        sec--;
-        if (sec < 0) {
-            clearInterval(countDown);
-            document.getElem
-            document.getElementById('timer').innerText="Fin"
-        }   return 0
+function timer(secs) {
+    if (timerInterval) {
+        clearInterval(timerInterval);
+    }
+    
+    const timerDisplay = document.getElementById('timer');
+    
+    timerInterval = setInterval(() => {
+        const minutes = Math.floor(secs / 60);
+        const seconds = secs % 60;
+        timerDisplay.innerText = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        
+        secs--;
+        
+        if (secs < 0) {
+            clearInterval(timerInterval);
+            timerDisplay.innerText = "Time's up!";
+            endGame();
+        }
     }, 1000);
+}
+
+function endGame() {
+    gameActive = false;
+    
+    userInputElement.disabled = true;
+    submitWordButton.disabled = true;
+    
+    const finalScore = showResult(score, words);
+    scoreSection.textContent = `Final Score: ${finalScore.toFixed(1)}%`;
+}
+
+function startGame(difficulty) {
+    gameActive = true;
+    score = 0;
+    words = 0;
+    
+    userInputElement.disabled = false;
+    submitWordButton.disabled = false;
+    
+    scoreSection.textContent = "Score: 0%";
+    
+    let timeLimit;
+    switch(difficulty) {
+        case 'easy': timeLimit = 60; break;
+        case 'medium': timeLimit = 45; break;
+        case 'hard': timeLimit = 30; break;
+        default: timeLimit = 10;
+    }
+    
+    timer(timeLimit);
 }
 
 function generateRandomWord(){
@@ -1993,49 +2033,124 @@ function checkSpelling(word1,word2,score,words){
     }
 }
 
-
 function returnScore(score,words){
     let scorePercentage = (score * 100 )/ words
     return scorePercentage
 }
 
-function getTypedWord($event){
-    if ($event.key === "Enter"){
-        userWord = userInput.value
-        userInput.value = ""
-        return userWord
-    }
-}
+function showResult(score,words){
+    return (score / words)* 100
+} 
 
-
-
-function main(){
+function main() {
     let score = 0;
     let words = 0;
-    while(timer()){
-        genWord = generateRandomWord()
-        divWordShown.innerText = genWord
-        let userWord = getTypedWord($event)
-        checkSpelling(genWord,userWord,score,words)
-    }
-    returnScore(score,words)
+    let currentWord = '';
+    
+    // Get DOM elements
+    const startButton = document.getElementById("strButton");
+    const divWordShown = document.getElementById("wordChosen");
+    const userInputElement = document.getElementById("word-tapped");
+    const scoreSection = document.getElementById("score-section");
+    
+    // Initially disable input
+    userInputElement.disabled = true;
+    
+    // Start button handler
+    startButton.addEventListener('click', () => {
+        if (!gameActive) {
+            // Reset game state
+            score = 0;
+            words = 0;
+            userInputElement.disabled = false;
+            userInputElement.value = '';
+            userInputElement.focus();
+            
+            // Show first word
+            currentWord = generateRandomWord();
+            divWordShown.textContent = currentWord;
+            scoreSection.textContent = "Score: 0%";
+            
+            // Start game with default difficulty if none selected
+            let difficulty = 'easy';
+            for (const radioButton of radioButtons) {
+                if (radioButton.checked) {
+                    difficulty = radioButton.value;
+                    break;
+                }
+            }
+            startGame(difficulty);
+        }
+    });
+    
+    // Handle user input with Enter key
+    userInputElement.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' && gameActive) {
+            event.preventDefault(); // Prevent default Enter behavior
+            
+            const userInput = userInputElement.value;
+            const currentWordLower = currentWord.toLowerCase();
+            
+            // Compare input with current word
+            if (userInput === currentWordLower) {
+                score++;
+            }
+            words++;
+            
+            // Update score display
+            const currentScore = (score / words) * 100;
+            scoreSection.textContent = `Score: ${currentScore.toFixed(1)}%`;
+            
+            // Generate new word and reset input
+            currentWord = generateRandomWord();
+            divWordShown.textContent = currentWord;
+            userInputElement.value = ''; // Clear input field
+            
+            // Log for debugging
+            console.log({
+                userInput,
+                currentWord: currentWordLower,
+                score,
+                words,
+                currentScore
+            });
+        }
+    });
+    
+    // Modify endGame function to show popup
+    window.endGame = function() {
+        gameActive = false;
+        userInputElement.disabled = true;
+        
+        const finalScore = (score / words) * 100;
+        
+        // Create and show popup
+        const popup = document.createElement('div');
+        popup.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            z-index: 1000;
+            text-align: center;
+            min-width: 300px;
+        `;
+        
+        popup.innerHTML = `
+            <h2>Game Over!</h2>
+            <p>Final Score: ${finalScore.toFixed(1)}%</p>
+            <p>Words Attempted: ${words}</p>
+            <p>Correct Words: ${score}</p>
+            <button onclick="this.parentElement.remove()">Close</button>
+        `;
+        
+        document.body.appendChild(popup);
+    };
 }
 
-
-
-startButton.addEventListener('click',()=>{
-    main()
-});
-
-
-submitDiffButton.addEventListener("click",($event)=>{
-    $event.preventDefault();
-    let selected_diff;
-    for (let i of radioButtons){
-        if (i.checked){
-            selected_diff = i.value;
-            break;
-        }
-    }
-    fieldsetDiff.innerHTML = `You have chosen ${selected_diff} difficulty`
-})
+// Start the game logic when page loads
+main();
