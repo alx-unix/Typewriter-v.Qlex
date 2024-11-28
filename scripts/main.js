@@ -1954,7 +1954,6 @@ const wordList = [
 ];
 
 let startButton = document.getElementById("strButton");
-let submitDiffButton = document.getElementById("sbtButton");
 let diffChosen = document.getElementById("set-diff")
 let fieldsetDiff = document.getElementById("choose-diff-fieldset")
 let radioButtons = document.querySelectorAll('input[name="difficulty"]');
@@ -2024,25 +2023,13 @@ function generateRandomWord(){
     return word;
     }
 
-function checkSpelling(word1,word2,score,words){
-    if (word1 === word2){
-        score++
-        words++
-    }else{
-        words++
-    }
-}
-
-function returnScore(score,words){
-    let scorePercentage = (score * 100 )/ words
-    return scorePercentage
-}
 
 function showResult(score,words){
     return (score / words)* 100
 } 
 
 function main() {
+    console.log('Initializing game...');
     let score = 0;
     let words = 0;
     let currentWord = '';
@@ -2055,10 +2042,13 @@ function main() {
     
     // Initially disable input
     userInputElement.disabled = true;
+    console.log('Input field disabled initially');
     
     // Start button handler
     startButton.addEventListener('click', () => {
+        console.log('Start button clicked');
         if (!gameActive) {
+            console.log('Starting new game...');
             // Reset game state
             score = 0;
             words = 0;
@@ -2068,6 +2058,7 @@ function main() {
             
             // Show first word
             currentWord = generateRandomWord();
+            console.log('First word generated:', currentWord);
             divWordShown.textContent = currentWord;
             scoreSection.textContent = "Score: 0%";
             
@@ -2079,7 +2070,10 @@ function main() {
                     break;
                 }
             }
+            console.log('Selected difficulty:', difficulty);
             startGame(difficulty);
+        } else {
+            console.log('Game already in progress');
         }
     });
     
@@ -2087,42 +2081,64 @@ function main() {
     userInputElement.addEventListener('keydown', (event) => {
         if (event.key === 'Enter' && gameActive) {
             event.preventDefault(); // Prevent default Enter behavior
+            console.log('Enter key pressed');
             
             const userInput = userInputElement.value;
             const currentWordLower = currentWord.toLowerCase();
             
+            console.log('Comparing words:', {
+                userInput,
+                currentWord: currentWordLower,
+                match: userInput === currentWordLower
+            });
+            
             // Compare input with current word
             if (userInput === currentWordLower) {
                 score++;
+                console.log('Correct word! Score increased to:', score);
+            } else {
+                console.log('Incorrect word');
             }
             words++;
             
             // Update score display
             const currentScore = (score / words) * 100;
             scoreSection.textContent = `Score: ${currentScore.toFixed(1)}%`;
+            console.log('Updated score:', {
+                correct: score,
+                attempts: words,
+                percentage: currentScore.toFixed(1) + '%'
+            });
             
             // Generate new word and reset input
             currentWord = generateRandomWord();
+            console.log('New word generated:', currentWord);
             divWordShown.textContent = currentWord;
             userInputElement.value = ''; // Clear input field
             
-            // Log for debugging
-            console.log({
-                userInput,
-                currentWord: currentWordLower,
+            // Game state summary
+            console.log('Current game state:', {
+                gameActive,
                 score,
                 words,
-                currentScore
+                currentWord,
+                currentScore: currentScore.toFixed(1) + '%'
             });
         }
     });
     
     // Modify endGame function to show popup
     window.endGame = function() {
+        console.log('Game ending...');
         gameActive = false;
         userInputElement.disabled = true;
         
         const finalScore = (score / words) * 100;
+        console.log('Final game results:', {
+            totalWords: words,
+            correctWords: score,
+            finalScore: finalScore.toFixed(1) + '%'
+        });
         
         // Create and show popup
         const popup = document.createElement('div');
@@ -2149,8 +2165,12 @@ function main() {
         `;
         
         document.body.appendChild(popup);
+        console.log('Game over popup displayed');
     };
+    
+    console.log('Game initialization complete');
 }
 
 // Start the game logic when page loads
+console.log('Starting main game function');
 main();
