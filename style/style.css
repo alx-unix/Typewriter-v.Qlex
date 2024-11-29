@@ -39,7 +39,10 @@ li {
 
 li:hover{
     background-color:#C4E0E5;
-    color: rgb(121, 126, 126);
+    color: rgb(255, 204, 0);
+    font-size: scale(1.1);
+    transform-origin:center;
+    
 }
 
 .root-container {
@@ -108,6 +111,7 @@ fieldset{
 
 #strButton:hover{
     background-color: rgba(29, 90, 163, 0.7);
+    cursor: pointer;
 }
 
 #timer-section{
@@ -136,6 +140,7 @@ footer{
     justify-content: center;
     align-items: center;
     border-top: 1px solid aliceblue;
+    font-size: 1.5rem;
 }
 
 #user-input{
@@ -167,9 +172,20 @@ footer{
 }
 
 #timer-bar{
-    width:15rem;
+    width:30rem;
     height: 2rem;
+    top: 0;
+    left: 0;
     background-color: #a0ff97;
+    border-radius: 2rem;
+    position: absolute;
+}
+
+#timer-bar-wrapper{
+    width:30rem;
+    height: 2rem;
+    background-color: #e2e2e2;
     margin-top: 2rem;
     border-radius: 2rem;
+    position: relative;
 }
