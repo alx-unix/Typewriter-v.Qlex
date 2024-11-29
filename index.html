@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Typewriter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Galindo&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style/style.css">
     <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
     <script src="scripts/config.js" defer></script>
@@ -13,7 +16,7 @@
 <body>
     <div class="root-container">
         <header id="header">
-            <h1>Test your keyboard skills !</h1>
+            <h1>Test your typing skills !</h1>
             <nav>
                 <ul id="nav-ul">
                     <li><a href="">Home</a></li>
@@ -36,25 +39,26 @@
                     <div id="timer-section">
                         <button type="text" id="strButton">Start</button>
                         <div id="timer"></div>
+                        <div id="timer-bar"></div>
                     </div>
                 </div>
                 <div id="choose-mode">
                     <fieldset id = "choose-diff-fieldset">
-                        <legend>Choose game difficulty:</legend>
+                        <legend>Choose game difficulty</legend>
                     
                         <div id="set-diff">
-                            <input type="radio" id="easy" name="difficulty" value="Easy" checked />
-                            <label for="easy">Easy</label>
+                            <input type="radio" id="easy" name="difficulty" value="Easy" checked/>
+                            <label for="easy" style="color: green;">Easy</label>
                         </div>
                     
                         <div id="set-diff">
                             <input type="radio" id="medium" name="difficulty" value="Medium" />
-                            <label for="medium">Medium</label>
+                            <label for="medium" style="color: orange;">Medium</label>
                         </div>
                     
                         <div id="set-diff">
                             <input type="radio" id="hard" name="difficulty" value="Hard" />
-                            <label for="hard">Hard</label>
+                            <label for="hard" style="color: red;">Hard</label>
                         </div>
                         <div>
                             <button type="submit" id="sbtButton" class="button">Submit</button>

@@ -12,8 +12,6 @@ let timerInterval = null;
 
 
 
-
-
 // Start the game logic when page loads
 console.log('Starting main game function');
 main();

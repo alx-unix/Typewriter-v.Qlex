@@ -45,7 +45,7 @@ function startGame(difficulty) {
         case 'easy': timeLimit = 60; break;
         case 'medium': timeLimit = 45; break;
         case 'hard': timeLimit = 30; break;
-        default: timeLimit = 30;
+        default: timeLimit = 2;
     }
     
     timer(timeLimit);
@@ -180,13 +180,14 @@ function main() {
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: white;
+            background: linear-gradient(#673AB7,#512DA8);
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            box-shadow: 10 0 10px rgba(0,0,0,0.5);
             z-index: 1000;
             text-align: center;
             min-width: 300px;
+            font-family:"Galindo",sans-serif;
         `;
         
         popup.innerHTML = `
