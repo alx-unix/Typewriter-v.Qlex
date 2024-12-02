@@ -4,7 +4,6 @@ function timer(secs) {
     }
 
     const timerDisplay = document.getElementById('timer');
-    const timerBar = document.getElementById("timer-bar")
     timerInterval = setInterval(() => {
         const minutes = Math.floor(secs / 60);
         const seconds = secs % 60;
@@ -17,8 +16,25 @@ function timer(secs) {
             timerDisplay.innerText = "Time's up!";
             endGame();
         }
+    
 
     }, 1000);
+}
+
+function progressBar(secs){
+
+    const progressBarL = document.getElementById("timer-bar");
+    let width = 100;
+    let ratio  = (width/secs) / 100;
+    progressInterval = setInterval(()=>{
+        if (width === 0){
+            clearInterval(progressInterval)
+        }
+        else{
+            width = width - ratio
+            progressBarL.style.width = width + '%'
+        }
+    },10)
 }
 
 function endGame() {
@@ -50,6 +66,7 @@ function startGame(difficulty) {
     }
     
     timer(timeLimit);
+    progressBar(timeLimit);
 }
 
 function generateRandomWord(){

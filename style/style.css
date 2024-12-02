@@ -173,7 +173,7 @@ footer{
 
 #timer-bar{
     width:30rem;
-    height: 2rem;
+    height: 1rem;
     top: 0;
     left: 0;
     background-color: #a0ff97;
@@ -183,7 +183,7 @@ footer{
 
 #timer-bar-wrapper{
     width:30rem;
-    height: 2rem;
+    height: 1rem;
     background-color: #e2e2e2;
     margin-top: 2rem;
     border-radius: 2rem;
